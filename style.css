@@ -1,0 +1,354 @@
+/* ========================
+   TimeStrike - style.css
+   ======================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+  --p1-color: #00d4ff;
+  --p2-color: #ff4d4d;
+  --bg-dark: #0a0a0f;
+  --bg-mid: #12121a;
+  --panel: #1a1a28;
+  --border: #2a2a40;
+  --text: #e8e8f0;
+  --gold: #ffd700;
+  --time-stop: #8a2be2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+.screen.active { display: flex; }
+
+/* ── Menu ── */
+#menu-screen {
+  flex-direction: column;
+}
+
+.menu-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,212,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(255,77,77,0.07) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px);
+  animation: bgPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+.menu-content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(5rem, 12vw, 9rem);
+  letter-spacing: 6px;
+  line-height: 1;
+  color: var(--text);
+  text-shadow: 0 0 40px rgba(0,212,255,0.5);
+}
+
+.title span {
+  color: var(--p1-color);
+  text-shadow: 0 0 60px var(--p1-color);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  color: rgba(232,232,240,0.5);
+  text-transform: uppercase;
+}
+
+/* ── Buttons ── */
+.btn-main {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem;
+  letter-spacing: 6px;
+  padding: 14px 60px;
+  background: transparent;
+  border: 2px solid var(--p1-color);
+  color: var(--p1-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-main:hover {
+  background: var(--p1-color);
+  color: var(--bg-dark);
+  box-shadow: 0 0 30px var(--p1-color);
+}
+
+.btn-secondary {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  padding: 10px 40px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: rgba(232,232,240,0.6);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* ── Controls Screen ── */
+#controls-screen { background: rgba(0,0,0,0.85); }
+
+.controls-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.controls-content h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  letter-spacing: 8px;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.player-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 28px;
+  min-width: 260px;
+}
+.player-card.p1 { border-top: 3px solid var(--p1-color); }
+.player-card.p2 { border-top: 3px solid var(--p2-color); }
+
+.player-card h3 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+.p1 h3 { color: var(--p1-color); }
+.p2 h3 { color: var(--p2-color); }
+
+.key-list { display: flex; flex-direction: column; gap: 10px; }
+
+.key-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.key-row.ability kbd {
+  background: rgba(138,43,226,0.2);
+  border-color: var(--time-stop);
+  color: #c77dff;
+}
+.key-row.ability span { color: #c77dff; font-weight: 700; }
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background: var(--bg-mid);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 3px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.key-row span {
+  font-size: 0.95rem;
+  color: rgba(232,232,240,0.8);
+}
+
+/* ── Game Screen ── */
+#game-screen {
+  flex-direction: column;
+  background: #0d0d15;
+}
+
+#hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.6);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+  flex-shrink: 0;
+  height: 64px;
+}
+
+.hud-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.p2-hud {
+  flex-direction: row-reverse;
+}
+
+.player-label {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+.p1-hud .player-label { color: var(--p1-color); }
+.p2-hud .player-label { color: var(--p2-color); }
+
+.health-bar-wrap {
+  width: 200px;
+  height: 14px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+
+.health-bar {
+  height: 100%;
+  width: 100%;
+  transition: width 0.15s;
+}
+.p1-hud .health-bar { background: var(--p1-color); }
+.p2-hud .health-bar { background: var(--p2-color); }
+
+.health-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.2rem;
+  min-width: 32px;
+}
+
+.ability-cooldown {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.ability-cooldown.ready {
+  border-color: #c77dff;
+  color: #c77dff;
+  box-shadow: 0 0 8px rgba(138,43,226,0.4);
+}
+
+.hud-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 0 20px;
+}
+
+#timer-display {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.2rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+#time-stop-overlay {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: #c77dff;
+  animation: timePulse 0.5s ease-in-out infinite alternate;
+}
+#time-stop-overlay.hidden { display: none; }
+
+@keyframes timePulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; text-shadow: 0 0 12px #c77dff; }
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  flex: 1;
+}
+
+/* ── Game Over ── */
+#gameover-screen { background: rgba(0,0,0,0.9); flex-direction: column; }
+
+.gameover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+#winner-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 6px;
+  animation: winnerGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes winnerGlow {
+  from { text-shadow: 0 0 20px currentColor; }
+  to   { text-shadow: 0 0 60px currentColor, 0 0 100px currentColor; }
+}
+
+/* ── Time Stop Visual Effect ── */
+body.time-stopped #game-canvas {
+  filter: saturate(0.3) brightness(0.8);
+  animation: timeStopShimmer 0.3s ease-out;
+}
+body.time-stopped #game-screen {
+  box-shadow: inset 0 0 80px rgba(138,43,226,0.3);
+}
+
+@keyframes timeStopShimmer {
+  0%   { filter: saturate(0.3) brightness(1.5) hue-rotate(60deg); }
+  100% { filter: saturate(0.3) brightness(0.8); }
+}
